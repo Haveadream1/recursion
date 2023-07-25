@@ -45,6 +45,53 @@ const fibsRec = (x) => {
 }
 fibsRec(8)
 
+let array = [9,3,7,5,6,4,8,2];
+let h = array.at(-1);
+let l = array[0];
+
+let lIndex = array.indexOf(l);
+let hIndex = array.indexOf(h);
+
+let mid = ((lIndex + 1) + hIndex / 2);
+
+const mergeSortLeft = () => {
+    console.log(mid)
+    console.log(array.slice(lIndex,mid));
+}
+mergeSortLeft();
+
+const mergeSortRight = () => {
+    console.log(array.slice(mid, hIndex + 1 ))
+}
+mergeSortRight()
+
+
+
+// MergeSort
+let array = [9,3,7,5,6,4,8,2];
+let l = array[0];
+let h = array.at(-1);
+console.log(l,h)
+
+let lIndex = array.indexOf(l);
+let hIndex = array.indexOf(h);
+
+const mergeSortLeft = () => {
+    console.log(array.slice(lIndex,mid));
+}
+
+const mergeSort = () => {
+    if (l < h) {
+        let mid = ((lIndex + 1) + hIndex / 2);
+        console.log(mid)
+
+        mergeSortLeft()
+        mergeSortRight(mid + 1, h)
+        merge(l, mid, h)
+    }
+}
+mergeSort()
+
 // exo code quiz
 
 // function that takes a number and return the sum
