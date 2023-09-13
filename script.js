@@ -24,7 +24,7 @@ const fibs = (x) => {
 fibs(8)
 //[0, 1, 1, 2, 3, 5, 8, 13]
 // the answer is the result of the tree
-// like fibonacci of 8 is fib(7) and fib(6) and we go down until fib(1)  or fib(0)
+// like fibonacci of 8 is fib(7) and fib(6) and we go down until fib(1) or fib(0)
 // as we know these value
 // so we need to move our position with length
 
@@ -45,52 +45,119 @@ const fibsRec = (x) => {
 }
 fibsRec(8)
 
-let array = [9,3,7,5,6,4,8,2];
-let h = array.at(-1);
+// merging sort
+const merge = (arr1, arr2) => {
+    let result = [];
+
+    let l = 0;
+    let h = 0;
+    /* our pointer */
+
+    while(l < arr1.length && h < arr2.length) {
+        if(arr1[l] <= arr2[h]) {
+            result.push(arr1[l]);
+            l++;
+            /* we move our pointer */
+        } else {
+            result.push(arr2[h]);
+            h++;
+        }
+    }
+
+    while(l < arr1.length) {
+        result.push(arr1[l]);
+        l++;
+    }
+    while(h < arr2.length) {
+        result.push(arr2[h]);
+        h++;
+    }
+    /* push the leftover */
+    return result;
+}
+
+const sortArray = (array) => {
+    /* base case */
+    if(array.length <= 1) {
+        return array;
+    }
+    /* round num */
+    let mid = Math.floor(array.length / 2);
+
+    /* not inclusive */
+    const left = sortArray(array.slice(0,mid));
+    /* start at mid inclusive and go to the end */
+    const right = sortArray(array.slice(mid))
+
+    return merge(left, right);
+}
+sortArray([9,3,7,5,6])
+// Work!
+
+// other try
+const array = [9,3,7,5,6,4,8,2];
+
 let l = array[0];
+let h = array.at(-1);
+// let h = array[array.length-1];
+console.log(l,h);
 
 let lIndex = array.indexOf(l);
-let hIndex = array.indexOf(h);
+let hIndex = array.indexOf(h) + 1;
 
-let mid = ((lIndex + 1) + hIndex / 2);
+let mid = ((array.indexOf(l) + 1) + array.indexOf(h)) / 2;
+console.log(mid);
+//array.splice(lIndex,mid);
+//array.splice(mid ,hIndex);
 
-const mergeSortLeft = () => {
-    console.log(mid)
-    console.log(array.slice(lIndex,mid));
-}
-mergeSortLeft();
+let sub1 = array.splice(lIndex,mid);
+let sub2 = array.splice(mid ,hIndex);
+console.log(sub1, sub2)
+// (4) [9, 3, 7, 5] (4) [6, 4, 8, 2]
 
-const mergeSortRight = () => {
-    console.log(array.slice(mid, hIndex + 1 ))
-}
-mergeSortRight()
+// work but i want several arrays
 
-
-
-// MergeSort
-let array = [9,3,7,5,6,4,8,2];
-let l = array[0];
-let h = array.at(-1);
-console.log(l,h)
-
-let lIndex = array.indexOf(l);
-let hIndex = array.indexOf(h);
-
-const mergeSortLeft = () => {
-    console.log(array.slice(lIndex,mid));
-}
-
-const mergeSort = () => {
-    if (l < h) {
-        let mid = ((lIndex + 1) + hIndex / 2);
-        console.log(mid)
-
-        mergeSortLeft()
-        mergeSortRight(mid + 1, h)
-        merge(l, mid, h)
+const merge = (left, right) => {
+    let arr = []
+    // break if empty
+    while (left.lenght && right.lenght) {
+        if(left[0] > right[0]) {
+            arr.push(right.shift())
+        } 
+            arr.push(left.shift())
     }
 }
-mergeSort()
+//
+const array = [9,3,7,5,6,4,8,2];
+const sort = (array) => {
+    
+    if ( array.length === 1) {
+        return array;
+    } else {
+        sort()
+    }
+}
+sort()
+
+const mergingSort = () => {
+    const mergeSortLeft = () => {
+        return mergingSort
+    }
+
+    if (array.length >= 2) {
+        let mid = ((array.indexOf(l) + 1) + array.indexOf(h)) / 2;
+        console.log(mid);
+        mergeSortLeft(l,mid)
+        mergeSortRight(mid + 1, h)
+    } else {
+        console.log("deeeeeeé")
+    }
+}
+mergingSort(l,h)
+/*  Divide the unsorted list into n sub-lists
+        a list of one element is considered sorted
+    Repeatedly merge sub-lists to produce new sorted sub-lists
+*/
 
 // exo code quiz
 
@@ -105,7 +172,7 @@ const sumRange = (n) => {
 }
 sumRange(3)
 
-// function that takes in a base and an exponent,
+// function that takes in a base and an exponent
 // if the exponent is 0 return 1
 const power = (base, exponent) => {
     if (exponent === 0) {
@@ -165,7 +232,7 @@ var sixty = productOfArray([1,2,3,10])
 console.log(six, sixty);
 
 // hard function that searches for a value in a
-// nested objectm return true if the object contains that value
+// nested object, return true if the object contains that value
 var nestedObject = {
     data: {
         info: {
@@ -193,6 +260,6 @@ const contains = (obj,value) => {
 	return false;
 }
 
-let hasIt = contains(nestedObject, 44); // true
-let doesntHaveIt = contains(nestedObject, "foo"); // false
-console.log(hasIt, doesntHaveIt);
+let contain = contains(nestedObject, 44); // true
+let noContain = contains(nestedObject, "foo"); // false
+console.log(contain, noContain);
